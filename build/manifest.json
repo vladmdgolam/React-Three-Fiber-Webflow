@@ -1,0 +1,14 @@
+{
+  "src/assets/Squares_Slow_Linear.mp4": {
+    "file": "assets/Squares_Slow_Linear-73bc4f76.mp4",
+    "src": "src/assets/Squares_Slow_Linear.mp4"
+  },
+  "src/main.jsx": {
+    "assets": [
+      "assets/Squares_Slow_Linear-73bc4f76.mp4"
+    ],
+    "file": "main.js",
+    "isEntry": true,
+    "src": "src/main.jsx"
+  }
+}
