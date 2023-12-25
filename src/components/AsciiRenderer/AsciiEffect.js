@@ -7,22 +7,6 @@
 const fS = 1.085
 const fS2 = 0.995
 
-function calculateLetterSpacing(resolution) {
-  // Коэффициенты полинома 5-й степени
-  const coefs = [
-    21.56082936, -71.81363766, 93.2904845, -59.70661848, 19.49278035,
-    -2.97980132,
-  ]
-
-  // Вычисление значения полинома
-  let ls = 0
-  for (let i = 0; i < coefs.length; i++) {
-    ls += coefs[i] * Math.pow(resolution, coefs.length - 1 - i)
-  }
-
-  return ls
-}
-
 class AsciiEffect {
   constructor(renderer, charSet = ' .:-=+*#%@', options = {}) {
     // ' .,:;=|iI+hHOE#`$';
