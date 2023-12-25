@@ -46,6 +46,8 @@ class AsciiEffect {
     domElement.style.cursor = 'default'
 
     const oAscii = document.createElement('table')
+    // add class to domElement
+    domElement.classList.add('ascii-effect')
     domElement.appendChild(oAscii)
 
     let iWidth, iHeight
@@ -108,14 +110,17 @@ class AsciiEffect {
     const oCanvasImg = renderer.domElement
 
     const oCanvas = document.createElement('canvas')
+
     if (!oCanvas.getContext) {
       return
     }
 
     const oCtx = oCanvas.getContext('2d')
-    if (!oCtx.getImageData) {
+    if (!oCtx || !oCtx.getImageData) {
       return
     }
+
+    oCtx.willReadFrequently = true
 
     let aCharList = bColor ? aDefaultColorCharList : aDefaultCharList
 
