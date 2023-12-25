@@ -1,4 +1,4 @@
-import { Image, OrbitControls, useVideoTexture } from '@react-three/drei'
+import { Image, useVideoTexture } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { button, useControls } from 'leva'
 import { useEffect } from 'react'
@@ -53,7 +53,7 @@ export const Overlay = ({
 
   return (
     <>
-      <OrbitControls makeDefault />
+      {/* <OrbitControls makeDefault /> */}
       <group position-z={0}>
         {pic && img && !videoSrc ? (
           <Image url={pic} side={DoubleSide} scale={[min, min]} />
