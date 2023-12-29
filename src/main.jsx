@@ -4,13 +4,23 @@ import { createRoot } from 'react-dom/client'
 
 import App, { videos } from './App'
 
-createRoot(document.getElementById('root-og')).render(<App video={videos.og} />)
-createRoot(document.getElementById('root-lines')).render(
-  <App video={videos.lines} />
-)
-createRoot(document.getElementById('root-shperes')).render(
-  <App video={videos.spheres} />
-)
-createRoot(document.getElementById('root-cubes')).render(
-  <App video={videos.cubes} />
-)
+function initializeReactApp() {
+  createRoot(document.getElementById('root-og')).render(
+    <App video={videos.og} />
+  )
+  createRoot(document.getElementById('root-lines')).render(
+    <App video={videos.lines} />
+  )
+  createRoot(document.getElementById('root-shperes')).render(
+    <App video={videos.spheres} />
+  )
+  createRoot(document.getElementById('root-cubes')).render(
+    <App video={videos.cubes} />
+  )
+}
+
+if (document.readyState === 'loading') {
+  window.addEventListener('DOMContentLoaded', initializeReactApp)
+} else {
+  initializeReactApp() // DOMContentLoaded has already fired
+}

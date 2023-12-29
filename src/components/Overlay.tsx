@@ -18,6 +18,11 @@ function VideoMaterial({ url }: { url: string }) {
   )
 }
 
+// const scales = {
+//   lines: 2,
+
+// }
+
 export const Overlay = ({
   img,
   set,
