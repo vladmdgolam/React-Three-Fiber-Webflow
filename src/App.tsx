@@ -16,18 +16,21 @@ export type vid = {
 }
 
 export const videos: { [key: string]: vid } = {
-  og: { src: og },
+  og: { src: og, name: 'og' },
   cubes: {
+    name: 'cubes',
     src: cubes,
     resolution: 0.25,
     scale: 0.75,
   },
   spheres: {
+    name: 'spheres',
     src: shperes,
     resolution: 0.35,
     scale: 0.55,
   },
   lines: {
+    name: 'lines',
     src: lines,
     resolution: 0.25,
     scale: 0.75,
