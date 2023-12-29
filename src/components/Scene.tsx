@@ -67,15 +67,6 @@ export const Scene = ({ video }: { video: vid }) => {
 
   return (
     <>
-      {/* <RandomizedLight key={String(img)} /> */}
-      <directionalLight intensity={0.5} />
-      {/* {!imgEnabled && (
-        <Bounds fit key={selectedScene}>
-          <Center key={selectedScene}>
-            {createElement(scenes[selectedScene])}
-          </Center>
-        </Bounds>
-      )} */}
       {enabled && (
         <AsciiRenderer
           letterSpacing={ls * coeff * s}
