@@ -11,6 +11,6 @@ createRoot(document.getElementById('root-lines')).render(
 createRoot(document.getElementById('root-shperes')).render(
   <App video={videos.spheres} />
 )
-createRoot(document.getElementById('root-lines')).render(
-  <App video={videos.lines} />
+createRoot(document.getElementById('root-cubes')).render(
+  <App video={videos.cubes} />
 )
