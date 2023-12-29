@@ -23,7 +23,7 @@ export default defineConfig({
         format: 'umd',
         entryFileNames: 'main.js',
         esModule: false,
-        compact: true,
+        compact: false,
       },
     },
   },
