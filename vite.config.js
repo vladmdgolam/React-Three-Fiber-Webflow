@@ -14,7 +14,7 @@ export default defineConfig({
     },
   },
   build: {
-    minify: false,
+    minify: true,
     manifest: true,
     outDir: 'build',
     rollupOptions: {
@@ -23,7 +23,7 @@ export default defineConfig({
         format: 'umd',
         entryFileNames: 'main.js',
         esModule: false,
-        compact: false,
+        compact: true,
       },
     },
   },
