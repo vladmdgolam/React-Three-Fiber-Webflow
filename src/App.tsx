@@ -1,4 +1,4 @@
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { useInView } from 'react-intersection-observer'
 
 import cubes from './assets/Cubes.mp4'
