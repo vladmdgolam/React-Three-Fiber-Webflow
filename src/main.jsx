@@ -4,14 +4,13 @@ import { createRoot } from 'react-dom/client'
 
 import App, { videos } from './App'
 
-createRoot(document.getElementById('root')).render(<App />)
-
-Object.keys(videos).forEach((key) => {
-  const rootId = `root-${key}`
-  const rootElement = document.getElementById(rootId)
-  if (rootElement) {
-    createRoot(rootElement).render(<App video={videos[key]} />)
-  } else {
-    console.log(`Element with id '${rootId}' not found.`)
-  }
-})
+createRoot(document.getElementById('root-og')).render(<App video={videos.og} />)
+createRoot(document.getElementById('root-lines')).render(
+  <App video={videos.lines} />
+)
+createRoot(document.getElementById('root-shperes')).render(
+  <App video={videos.spheres} />
+)
+createRoot(document.getElementById('root-lines')).render(
+  <App video={videos.lines} />
+)
