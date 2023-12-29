@@ -26,5 +26,5 @@ function initializeReactApp() {
 if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', initializeReactApp)
 } else {
-  initializeReactApp() // DOMContentLoaded has already fired
+  initializeReactApp()
 }
