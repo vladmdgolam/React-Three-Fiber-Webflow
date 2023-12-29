@@ -57704,7 +57704,7 @@
     createRoot$1(document.getElementById("root-lines")).render(
       /* @__PURE__ */ jsx(App, { video: videos.lines })
     );
-    createRoot$1(document.getElementById("root-shperes")).render(
+    createRoot$1(document.getElementById("root-spheres")).render(
       /* @__PURE__ */ jsx(App, { video: videos.spheres })
     );
     createRoot$1(document.getElementById("root-cubes")).render(

@@ -11,7 +11,7 @@ function initializeReactApp() {
   createRoot(document.getElementById('root-lines')).render(
     <App video={videos.lines} />
   )
-  createRoot(document.getElementById('root-shperes')).render(
+  createRoot(document.getElementById('root-spheres')).render(
     <App video={videos.spheres} />
   )
   createRoot(document.getElementById('root-cubes')).render(
