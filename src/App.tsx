@@ -1,4 +1,5 @@
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { useInView } from 'react-intersection-observer'
 
 import cubes from './assets/Cubes.mp4'
 import lines from './assets/lines.mp4'
@@ -37,13 +38,17 @@ export const videos: { [key: string]: vid } = {
   },
 }
 
+const DisableRender = () => useFrame(() => null, 1000)
+
 export default function App({ video = videos.og }: { video: vid }) {
+  const { ref, inView } = useInView()
   return (
-    <>
+    <div ref={ref} className="canvasContainer">
       <Menu />
-      <Canvas gl={{ alpha: true }} camera={{ far: 10000, near: 0.001 }}>
+      <Canvas camera={{ far: 10000, near: 0.001 }} dpr={0.5}>
+        {!inView && <DisableRender />}
         <Scene video={video} />
       </Canvas>
-    </>
+    </div>
   )
 }
