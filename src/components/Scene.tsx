@@ -1,8 +1,7 @@
-import { Bounds, Center } from '@react-three/drei'
 import { useControls } from 'leva'
-import { createElement } from 'react'
 
-import { SceneEnum, scenes } from '../scenes'
+import { vid } from '../App'
+import { SceneEnum } from '../scenes'
 import { AsciiRenderer } from './AsciiRenderer/AsciiRenderer'
 import { Overlay } from './Overlay'
 
@@ -28,7 +27,7 @@ function getCoefficient(scale: number): number {
   return m * scale + b
 }
 
-export const Scene = () => {
+export const Scene = ({ video }: { video: vid }) => {
   const [
     { characters, enabled, resolution, selectedScene, imgEnabled, s },
     set,
@@ -40,7 +39,7 @@ export const Scene = () => {
     enabled: { value: true, label: 'Effect' },
     // resolution = 0.15,
     resolution: {
-      value: 0.17,
+      value: video.resolution || 0.17,
       min: 0.01,
       max: 1,
       step: 0.01,
@@ -60,7 +59,7 @@ export const Scene = () => {
   }))
 
   const { scale } = useControls({
-    scale: { value: 1, min: 0, max: 2, step: 0.01 },
+    scale: { value: video.scale || 1, min: 0, max: 2, step: 0.01 },
   })
 
   const ls = calculateLetterSpacing(resolution)
@@ -70,13 +69,13 @@ export const Scene = () => {
     <>
       {/* <RandomizedLight key={String(img)} /> */}
       <directionalLight intensity={0.5} />
-      {!imgEnabled && (
+      {/* {!imgEnabled && (
         <Bounds fit key={selectedScene}>
           <Center key={selectedScene}>
             {createElement(scenes[selectedScene])}
           </Center>
         </Bounds>
-      )}
+      )} */}
       {enabled && (
         <AsciiRenderer
           letterSpacing={ls * coeff * s}
@@ -87,7 +86,7 @@ export const Scene = () => {
           scale={scale}
         />
       )}
-      <Overlay set={set} img={imgEnabled} />
+      <Overlay set={set} img={imgEnabled} video={video.src} />
     </>
   )
 }

@@ -1,10 +1,10 @@
-import { Image, useVideoTexture } from '@react-three/drei'
+import { Image, useAspect, useVideoTexture } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { button, useControls } from 'leva'
 import { useEffect } from 'react'
 import { DoubleSide } from 'three'
 
-import videoSrcDefault from '../assets/Squares_Slow_Linear.mp4'
+import { vid } from '../App'
 /* eslint-disable jsx-a11y/alt-text */
 import { useLoadVideo } from '../hooks/useLoadVideo'
 import { SceneEnum } from '../scenes'
@@ -21,6 +21,7 @@ function VideoMaterial({ url }: { url: string }) {
 export const Overlay = ({
   img,
   set,
+  video,
 }: {
   img?: boolean
   set: (value: {
@@ -31,6 +32,7 @@ export const Overlay = ({
     imgEnabled?: boolean | undefined
     s?: number | undefined
   }) => void
+  video: vid
 }) => {
   const { viewport } = useThree()
 
@@ -51,6 +53,14 @@ export const Overlay = ({
 
   const min = Math.min(viewport.width, viewport.height)
 
+  const video_source = videoSrc || video
+
+  const scale = useAspect(
+    3840, // Pixel-width of the video
+    2160, // Pixel-height of the video
+    1 // Optional scaling factor
+  )
+
   return (
     <>
       {/* <OrbitControls makeDefault /> */}
@@ -58,10 +68,10 @@ export const Overlay = ({
         {pic && img && !videoSrc ? (
           <Image url={pic} side={DoubleSide} scale={[min, min]} />
         ) : null}
-        {img && (videoSrc || videoSrcDefault) ? (
+        {img && video_source ? (
           <mesh>
-            <planeGeometry args={[viewport.width, viewport.height]} />
-            <VideoMaterial url={videoSrc || videoSrcDefault} />
+            <planeGeometry args={[scale[0], scale[1]]} />
+            <VideoMaterial url={video_source} />
           </mesh>
         ) : null}
       </group>
