@@ -125,10 +125,6 @@ class AsciiEffect {
       // Coloring loop starts now
       let strChars = ''
 
-      // console.time('rendering');
-
-      // const aspectRatio = 2 // This can be adjusted as needed
-
       for (let y = 0; y < iHeight; y += 2) {
         for (let x = 0; x < iWidth; x += 2) {
           const iOffset = (y * iWidth + x) * 4
@@ -197,10 +193,6 @@ class AsciiEffect {
       }
 
       oAscii.innerHTML = `<tr><td style="display:block;width:${width}px;height:${height}px;overflow:hidden">${strChars}</td></tr>`
-
-      // console.timeEnd('rendering');
-
-      // return oAscii;
     }
   }
 }

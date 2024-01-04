@@ -1,4 +1,5 @@
 import { Canvas, useFrame } from '@react-three/fiber'
+import { useControls } from 'leva'
 import { useInView } from 'react-intersection-observer'
 
 import cubes from './assets/Cubes.mp4'
@@ -9,7 +10,7 @@ import { Menu } from './components/Menu'
 import { Scene } from './components/Scene'
 
 export type vid = {
-  src: any
+  src?: any
   resolution?: number
   scale?: number
   dimensions?: number[]
@@ -17,7 +18,7 @@ export type vid = {
 }
 
 export const videos: { [key: string]: vid } = {
-  og: { src: og, name: 'og' },
+  og: { src: og, name: 'og', scale: 0.75, resolution: 0.17 },
   cubes: {
     name: 'cubes',
     src: cubes,
@@ -28,7 +29,7 @@ export const videos: { [key: string]: vid } = {
     name: 'spheres',
     src: shperes,
     resolution: 0.35,
-    scale: 0.55,
+    scale: 0.65,
   },
   lines: {
     name: 'lines',
@@ -40,15 +41,20 @@ export const videos: { [key: string]: vid } = {
 
 const DisableRender = () => useFrame(() => null, 1000)
 
-export default function App({ video = videos.og }: { video: vid }) {
+export default function App({ video }: { video: vid }) {
   const { ref, inView } = useInView()
+  const { selectedVideo } = useControls({
+    selectedVideo: { value: video.name, options: Object.keys(videos) },
+  })
   return (
-    <div ref={ref} className="canvasContainer">
+    <>
       <Menu />
-      <Canvas camera={{ far: 10000, near: 0.001 }} dpr={0.5}>
-        {!inView && <DisableRender />}
-        <Scene video={video} />
-      </Canvas>
-    </div>
+      <div ref={ref} className="canvasContainer">
+        <Canvas camera={{ far: 10000, near: 0.001 }}>
+          {!inView && <DisableRender />}
+          <Scene video={videos[selectedVideo]} />
+        </Canvas>
+      </div>
+    </>
   )
 }
