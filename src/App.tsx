@@ -50,7 +50,7 @@ export default function App({ video }: { video: vid }) {
     <>
       <Menu />
       <div ref={ref} className="canvasContainer">
-        <Canvas camera={{ far: 10000, near: 0.001 }}>
+        <Canvas camera={{ near: 0.001 }}>
           {!inView && <DisableRender />}
           <Scene video={videos[selectedVideo]} />
         </Canvas>

@@ -39,7 +39,7 @@ export const Overlay = ({
   }) => void
   video: vid
 }) => {
-  const { viewport } = useThree()
+  const { viewport } = useThree(({ viewport }) => ({ viewport }))
 
   const [videoSrc, loadVideo] = useLoadVideo()
 
