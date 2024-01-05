@@ -134,6 +134,10 @@ vec2 calculateTextureCoordinates(float index, vec2 normalizedPos, float texWidth
     normalizedPos.x = map(normalizedPos.x, border, 1.0 - border, 0.0, 1.0);
     normalizedPos.y = map(normalizedPos.y, border, 1.0 - border, 0.0, 1.0);
 
+    // clamp
+    // normalizedPos.x = clamp(normalizedPos.x, 0.1, 0.9);
+    // normalizedPos.y = clamp(normalizedPos.y, 0.1, 0.9);
+
     return vec2(texOffset + normalizedPos.x * texWidth, normalizedPos.y);
 }
 
@@ -146,17 +150,16 @@ vec4 drawImageInCellBasedOnC(Cell cell, vec2 p, sampler2D tex, float c) {
     normalizedPos = fract(normalizedPos * 2.0);
     float index = calculateTextureIndex(c, quadrant);
 
-    // Calculate the distance to the nearest border
-    float distanceToBorder = min(min(normalizedPos.x - border, 1.0 - border - normalizedPos.x), min(normalizedPos.y - border, 1.0 - border - normalizedPos.y));
-    // Normalize the distance based on the specified radius
-    float blendFactor = smoothstep(0.0, 0.02, distanceToBorder);
+    // if(index < 1.0) {
+    //     return vec4(0.0);
+    // }
+
+    if(normalizedPos.x < border || normalizedPos.x > 1.0 - border || normalizedPos.y < border || normalizedPos.y > 1.0 - border) {
+        return vec4(1.0);
+    }
 
     vec2 texCoords = calculateTextureCoordinates(index, normalizedPos, texWidth, border);
-    vec4 textureColor = texture2D(tex, texCoords);
-    vec4 borderColor = vec4(1.0);
-
-    // Mix the texture color with the border color based on the blend factor
-    return mix(textureColor, borderColor, 1.0 - blendFactor);
+    return texture2D(tex, texCoords);
 }
 
 void main() {
@@ -169,6 +172,8 @@ void main() {
 
         vec4 texColor = drawImageInCellBasedOnC(cell, p, tex, c);
 
+        float brightness = (texColor.r + texColor.g + texColor.b) / 3.0;
+        texColor.a = 1.0 - brightness;
         gl_FragColor = texColor;
     } else {
         gl_FragColor = texture2D(tDiffuse, vUV);

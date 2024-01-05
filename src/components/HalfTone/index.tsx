@@ -2,10 +2,11 @@ import { Effects, useTexture } from '@react-three/drei'
 import { ReactThreeFiber, extend, useThree } from '@react-three/fiber'
 import { useControls } from 'leva'
 import { useEffect, useMemo } from 'react'
+import { NearestFilter } from 'three'
 import { mapLinear } from 'three/src/math/MathUtils'
 
 import { vid } from '../../App'
-import texture from '../../assets/shapes9.png'
+import texture from '../../assets/shapes6.png'
 import { HalftonePass } from './HalfTonePass'
 
 extend({ HalftonePass })
@@ -28,7 +29,12 @@ export const HalfTone = ({ video }: vid) => {
     size,
     viewport,
   }))
-  const shapes = useTexture(texture)
+  const shapes = useTexture(texture, (t) => {
+    t.magFilter = t.minFilter = NearestFilter
+    // t.wrapS = MirroredRepeatWrapping
+    // t.wrapT = ClampToEdgeWrapping
+    // t.wrapS = ClampToEdgeWrapping
+  })
 
   const initialProps: InitialProps = useMemo(() => {
     const border = mapLinear(video.scale || 1, 0, 1, 0.5, 0)
