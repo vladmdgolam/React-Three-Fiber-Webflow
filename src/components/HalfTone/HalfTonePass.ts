@@ -35,7 +35,6 @@ class HalftonePass extends Pass {
   public uniforms: any
 
   constructor(width: number, height: number, params: HalftonePassParams) {
-    console.log('constructor')
     super()
 
     if (HalftoneShader === undefined) {
@@ -56,7 +55,6 @@ class HalftonePass extends Pass {
     for (const key in params) {
       if (params.hasOwnProperty(key) && this.uniforms.hasOwnProperty(key)) {
         this.uniforms[key].value = params[key as keyof HalftonePassParams]
-        console.log(key, params[key as keyof HalftonePassParams])
       }
     }
 
@@ -82,7 +80,6 @@ class HalftonePass extends Pass {
   }
 
   public setSize(width: number, height: number): void {
-    console.log('setSize', width, height)
     this.uniforms.width.value = width
     this.uniforms.height.value = height
   }

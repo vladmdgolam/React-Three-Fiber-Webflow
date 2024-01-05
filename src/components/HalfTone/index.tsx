@@ -6,7 +6,7 @@ import { NearestFilter } from 'three'
 import { mapLinear } from 'three/src/math/MathUtils'
 
 import { vid } from '../../App'
-import texture from '../../assets/shapes6.png'
+import texture from '../../assets/shapes9.png'
 import { HalftonePass } from './HalfTonePass'
 
 extend({ HalftonePass })
@@ -31,9 +31,6 @@ export const HalfTone = ({ video }: vid) => {
   }))
   const shapes = useTexture(texture, (t) => {
     t.magFilter = t.minFilter = NearestFilter
-    // t.wrapS = MirroredRepeatWrapping
-    // t.wrapT = ClampToEdgeWrapping
-    // t.wrapS = ClampToEdgeWrapping
   })
 
   const initialProps: InitialProps = useMemo(() => {
